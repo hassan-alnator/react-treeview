@@ -1,3 +1,5 @@
+//TODO : add support for file icons based on extention
+
 import React, {PropTypes} from 'react';
 
 const TreeView = React.createClass({
@@ -7,6 +9,7 @@ const TreeView = React.createClass({
     nodeLabel: PropTypes.node.isRequired,
     className: PropTypes.string,
     itemClassName: PropTypes.string,
+    showIcon:PropTypes.bool
   },
 
   getInitialState() {
@@ -28,6 +31,7 @@ const TreeView = React.createClass({
       nodeLabel,
       children,
       defaultCollapsed,
+      showIcon = true,
       ...rest,
     } = this.props;
 
@@ -38,11 +42,11 @@ const TreeView = React.createClass({
       containerClassName += ' tree-view_children-collapsed';
     }
 
-    const arrow =
+    const arrow = showIcon ?
       <div
         {...rest}
         className={className + ' ' + arrowClassName}
-        onClick={this.handleClick}/>;
+        onClick={this.handleClick}/> : '';
 
     return (
       <div className="tree-view">
